@@ -44,8 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers().permitAll()
                 .antMatchers("/register", "/inject", "/login", "/health", "/v2/api-docs",
-                        "/swagger-resources/configuration/ui", "/swagger-resources",
-                        "/swagger-resources/configuration/security", "/swagger-ui.html",
+                        "/swagger-resources/**", "/swagger-ui.html",
                         "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/cars/*", "/users/*")
                 .hasRole(User.Role.MANAGER.name())
