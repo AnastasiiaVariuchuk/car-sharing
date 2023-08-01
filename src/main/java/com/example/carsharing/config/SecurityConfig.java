@@ -56,10 +56,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter(jwtTokenProvider);
     }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
-
