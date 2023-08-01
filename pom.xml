@@ -37,12 +37,12 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>4.0.0</version>
+            <version>4.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
-            <version>4.22.0</version>
+            <version>4.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,7 +85,7 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.project-lombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
@@ -94,18 +94,16 @@
             <plugin>
                <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.8.0</version>
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
                         <configuration>
-                            <propertyFile>src/ma</propertyFile>
+                            <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>
