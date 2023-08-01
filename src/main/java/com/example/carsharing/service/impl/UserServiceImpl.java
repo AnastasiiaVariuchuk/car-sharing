@@ -1,5 +1,6 @@
 package com.example.carsharing.service.impl;
 
+import java.util.NoSuchElementException;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.UserRepository;
 import com.example.carsharing.service.UserService;
@@ -41,5 +42,12 @@ public class UserServiceImpl implements UserService {
         userFromDb.setPassword(user.getPassword());
         userFromDb.setRole(user.getRole());
         return userFromDb;
+    }
+
+    @Override
+    public User getById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new NoSuchElementException("No such user with id: " + userId)
+        );
     }
 }

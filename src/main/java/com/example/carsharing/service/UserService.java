@@ -8,4 +8,6 @@ public interface UserService {
     User getProfileInfo(User user);
 
     User updateProfileInfo(User user);
+
+    User getById(Long userId);
 }
