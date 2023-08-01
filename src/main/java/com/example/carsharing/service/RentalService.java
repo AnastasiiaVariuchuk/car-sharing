@@ -13,5 +13,5 @@ public interface RentalService {
 
     Rental getById(Long id);
 
-    Rental terminateRent(Long id);
+    Rental terminate(Long id);
 }
