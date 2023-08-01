@@ -1,7 +1,7 @@
 CREATE TABLE if not exists `rentals` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
                            `rental_date` DATE NOT NULL,
-                           `return_date` DATE  DEFAULT NULL,
+                           `return_date` DATE NOT NULL,
                            `actual_return_date` DATE  DEFAULT NULL,
                            `car_id` bigint DEFAULT NULL,
                            `user_id` bigint DEFAULT NULL,

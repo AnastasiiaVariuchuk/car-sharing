@@ -2,9 +2,12 @@ package com.example.carsharing.model;
 
 import java.math.BigDecimal;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +20,14 @@ import lombok.ToString;
 @Table(name = "payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rentalId;
+    private Long id;
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Rental rental;
+    @Enumerated(EnumType.STRING)
     private Status status;
+    @Enumerated(EnumType.STRING)
     private Type type;
     private String sessionUrl;
     private String sessionId;
