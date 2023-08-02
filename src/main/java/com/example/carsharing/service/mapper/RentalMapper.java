@@ -11,6 +11,7 @@ import org.mapstruct.Mapping;
 public interface RentalMapper {
     RentalResponseDto mapToDto(Rental rental);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "carId", target = "car.id")
+    @Mapping(source = "userId", target = "user.id")
     Rental mapToEntity(RentalRequestDto rentalRequestDto);
 }
