@@ -6,7 +6,6 @@ import com.example.carsharing.dto.SessionResponseDto;
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.payment.PaymentProvider;
-import com.example.carsharing.service.CarService;
 import com.example.carsharing.service.PaymentService;
 import com.example.carsharing.service.RentalService;
 import com.example.carsharing.service.mapper.SessionMapper;

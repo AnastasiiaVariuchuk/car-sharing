@@ -24,7 +24,6 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentRepository.getByUser(user);
     }
 
-
     @Override
     public Payment.Type findType(Rental rental) {
         if (rental.getActualReturnDate().isAfter(rental.getReturnDate())) {
