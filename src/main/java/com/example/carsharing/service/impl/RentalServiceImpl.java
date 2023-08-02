@@ -22,6 +22,11 @@ public class RentalServiceImpl implements RentalService {
     private final UserService userService;
 
     @Override
+    public Rental add(Rental rental) {
+        return rentalRepository.save(rental);
+    }
+
+    @Override
     public Rental add(Long carId, Long userId, LocalDateTime returnDate) {
         Car car = carService.getById(carId);
         if (car.getInventory() < MIN_AMOUNT_TO_RENT) {
