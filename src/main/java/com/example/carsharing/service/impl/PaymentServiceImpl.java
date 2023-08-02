@@ -8,6 +8,7 @@ import com.example.carsharing.service.PaymentService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 @Service
@@ -30,5 +31,12 @@ public class PaymentServiceImpl implements PaymentService {
             return Payment.Type.FINE;
         }
         return Payment.Type.PAYMENT;
+    }
+
+    @Override
+    @Transactional
+    public void setPaid(String sessionId) {
+        Payment payment = paymentRepository.getBySessionId(sessionId);
+        payment.setStatus(Payment.Status.PAID);
     }
 }

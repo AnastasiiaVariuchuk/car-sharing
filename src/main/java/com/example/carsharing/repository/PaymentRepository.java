@@ -12,4 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface PaymentRepository extends CrudRepository<Payment, Long> {
     @Query("FROM Payment p INNER JOIN Rental r WHERE p.id=r.id AND r.user = :user")
     List<Payment> getByUser(@Param("user") User user);
+
+    @Query("FROM Payment WHERE sessionId = :sessionId")
+    Payment getBySessionId(@Param("sessionId") String sessionId);
+
 }

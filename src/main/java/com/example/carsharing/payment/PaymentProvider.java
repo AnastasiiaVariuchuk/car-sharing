@@ -2,6 +2,7 @@ package com.example.carsharing.payment;
 
 import static com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData.ProductData.builder;
 
+import com.example.carsharing.exception.NoSuchSessionException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
 import com.stripe.Stripe;
@@ -17,8 +18,8 @@ public class PaymentProvider {
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
     private String currency = "usd";
-    private String successUrl = "https://localhost:8080/payments/success/";
-    private String cancelUrl = "https://localhost:8080/payments/cancel/";
+    private String successUrl = "https://localhost:8080/payments/success";
+    private String cancelUrl = "https://localhost:8080/payments/cancel";
 
     @PostConstruct
     public void init() {
@@ -41,9 +42,20 @@ public class PaymentProvider {
                         ).setQuantity(1L)
                         .build()
                 ).setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl(successUrl)
+                .setSuccessUrl(successUrl + "?session_id={CHECKOUT_SESSION_ID}")
                 .setCancelUrl(cancelUrl);
         SessionCreateParams createParams = builder.build();
         return Session.create(createParams);
+    }
+
+    public boolean isSessionPaid(String sessionId) {
+        Session session = null;
+        try {
+            session = Session.retrieve(sessionId);
+            return session.getPaymentStatus().equals("paid");
+        } catch (StripeException e) {
+            throw new NoSuchSessionException("Can't find session with id: " + sessionId, e);
+        }
+
     }
 }

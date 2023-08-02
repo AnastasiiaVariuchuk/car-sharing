@@ -1,14 +1,12 @@
 package com.example.carsharing.controller;
 
-//<<<<<<< HEAD
-
-import com.example.carsharing.dto.SessionResponseDto;
+import com.example.carsharing.dto.response.PaymentResponseDto;
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.payment.PaymentProvider;
 import com.example.carsharing.service.PaymentService;
 import com.example.carsharing.service.RentalService;
-import com.example.carsharing.service.mapper.SessionMapper;
+import com.example.carsharing.service.mapper.PaymentMapper;
 import com.example.carsharing.strategy.TotalAmountHandlerStrategy;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
@@ -21,26 +19,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("payments/")
+@RequestMapping("/payments")
 public class PaymentController {
     private PaymentProvider paymentProvider;
     private RentalService rentalService;
     private PaymentService paymentService;
     private TotalAmountHandlerStrategy strategy;
-    private SessionMapper sessionMapper;
+    private PaymentMapper paymentMapper;
 
-    @GetMapping("success/")
-    public String successPayment() {
+    @GetMapping("/success")
+    public String successPayment(@RequestParam("session_id") String sessionId) {
+        if (paymentProvider.isSessionPaid(sessionId)) {
+            paymentService.setPaid(sessionId);
+        }
         return "Successful payment";
     }
 
-    @GetMapping("cancel/")
+    @GetMapping("/cancel")
     public String cancelPayment() {
         return "Something went wrong";
     }
 
     @PostMapping
-    public SessionResponseDto createSession(@RequestParam Long rentalId)
+    public PaymentResponseDto createSession(@RequestParam Long rentalId)
             throws StripeException {
         Rental rental = rentalService.getById(rentalId);
         Payment payment = new Payment();
@@ -54,7 +55,7 @@ public class PaymentController {
         payment.setSessionId(session.getId());
         payment.setSessionUrl(session.getUrl());
         paymentService.add(payment);
-        return sessionMapper.mapToDto(session);
+        return paymentMapper.mapToDto(payment);
     }
 
 }
