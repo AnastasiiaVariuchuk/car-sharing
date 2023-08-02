@@ -52,6 +52,6 @@ public class SwaggerConfig {
         return Collections.singletonList(new SecurityReference("JWT",
                 new AuthorizationScope[]{
                         new AuthorizationScope("global", "accessEverything")
-        }));
+                }));
     }
 }
