@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
@@ -70,5 +71,14 @@ public class RentalServiceImplTest {
         when(carService.getById(CAR_ID)).thenReturn(car);
 
         assertThrows(NotEnoughCarInventoryException.class, () -> rentalService.add(CAR_ID, USER_ID, LocalDateTime.now()));
+    }
+
+    @Test
+    public void testGetByUserAndActiveness() {
+        boolean isActive = true;
+        when(rentalRepository.findRentalByUserAndActualReturnDateIsNull(user)).thenReturn(List.of(new Rental()));
+        List<Rental> rentals = rentalService.getByUserAndActiveness(user, isActive);
+        assertNotNull(rentals);
+        assertFalse(rentals.isEmpty());
     }
 }
