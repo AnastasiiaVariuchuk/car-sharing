@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 @Entity
 @Table(name = "users")
 public class User {
@@ -28,6 +30,13 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User() {
+    }
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public enum Role {
         MANAGER,
