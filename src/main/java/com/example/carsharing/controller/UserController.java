@@ -24,8 +24,8 @@ public class UserController {
     private final UserMapper userMapper;
 
     @PutMapping("/{id}/role")
-    public UserResponseDto updateRole(@PathVariable Long userId, @RequestParam User.Role role) {
-        return userMapper.mapToDto(userService.updateUserRole(userId, role));
+    public UserResponseDto updateRole(@PathVariable Long id, @RequestParam User.Role role) {
+        return userMapper.mapToDto(userService.updateUserRole(id, role));
     }
 
     @GetMapping("/me")
