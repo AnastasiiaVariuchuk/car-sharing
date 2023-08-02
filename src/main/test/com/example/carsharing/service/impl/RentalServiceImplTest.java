@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
@@ -80,5 +81,20 @@ public class RentalServiceImplTest {
         List<Rental> rentals = rentalService.getByUserAndActiveness(user, isActive);
         assertNotNull(rentals);
         assertFalse(rentals.isEmpty());
+    }
+
+    @Test
+    public void testGetById() {
+        Long rentalId = 1L;
+        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(new Rental()));
+        Rental rental = rentalService.getById(rentalId);
+        assertNotNull(rental);
+    }
+
+    @Test
+    public void testGetById_NotFound() {
+        Long rentalId = 1L;
+        when(rentalRepository.findById(rentalId)).thenReturn(Optional.empty());
+        assertThrows(NoSuchElementException.class, () -> rentalService.getById(rentalId));
     }
 }
