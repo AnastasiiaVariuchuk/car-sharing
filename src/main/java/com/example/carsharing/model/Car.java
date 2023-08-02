@@ -28,6 +28,13 @@ public class Car {
     private int inventory;
     private BigDecimal dailyFee;
 
+    public Car() {
+    }
+
+    public Car(Long id) {
+        this.id = id;
+    }
+
     public enum Type {
         SEDAN,
         SUV,
