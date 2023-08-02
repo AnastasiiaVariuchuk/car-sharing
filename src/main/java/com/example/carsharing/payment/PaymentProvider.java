@@ -2,6 +2,7 @@ package com.example.carsharing.payment;
 
 import static com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData.ProductData.builder;
 
+import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -24,7 +25,7 @@ public class PaymentProvider {
         Stripe.apiKey = stripeSecretKey;
     }
 
-    public Session createSession(Payment payment) throws StripeException {
+    public Session createSession(Payment payment, Car car) throws StripeException {
         SessionCreateParams.Builder builder = new SessionCreateParams.Builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .addLineItem(SessionCreateParams.LineItem.builder()
@@ -33,7 +34,8 @@ public class PaymentProvider {
                                 .setUnitAmount(payment.getAmountToPay().longValue())
                                 .setProductData(builder()
                                         .setName("Payment")
-                                        .setDescription("Description")
+                                        .setDescription(car.getBrand() + " "
+                                                        + car.getModel() + " rental")
                                         .build())
                                 .build()
                         ).setQuantity(1L)
