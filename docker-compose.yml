@@ -19,9 +19,8 @@ services:
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     volumes:
-      - ./src/main/recourses/db/changelog:/db.changelog
+      - ./src/main/resources/db/changelog:/db.changelog
     environment:
-      SPRING_LIQUIBASE_CHANGE_LOG: "file:/db/changelog/db.changelog-master.yaml"
       SPRING_APPLICATION_JSON: '{
       "spring.datasource.url" : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?createDatabaseIfNotExist=true",
       "spring.datasource.username" : "$MYSQLDB_USER",
@@ -29,5 +28,11 @@ services:
       "spring.datasource.driver-class-name" : "com.mysql.cj.jdbc.Driver",
       "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
       "spring.jpa.hibernate.ddl-auto" : "validate",
-      "spring.liquibase.change-log" : "classpath:db/changelog/db.changelog-master.yaml"
+      "spring.mvc.pathmatch.matching-strategy" : "$SPRING_MVC_MATCHING_STRATEGY",
+      "springdoc.swagger-ui.tagsSorter" : "$SPRINGDOC_TAGS_SORTER",
+      "spring.liquibase.change-log" : "$SPRING_LIQUIBASE_CHANGELOG",
+      "telegram.bot.token" : "$TELEGRAM_BOT_TOKEN",
+      "telegram.bot.id" : "$TELEGRAM_BOT_ID",
+      "stripe.secret.key" : "$STRIPE_SECRET_KEY",
+      "telegram.chat.id" : "$TELEGRAM_CHAT_ID"
       }'
