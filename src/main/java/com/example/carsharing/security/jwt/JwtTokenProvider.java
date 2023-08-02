@@ -1,4 +1,4 @@
-package com.example.carsharing.security;
+package com.example.carsharing.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

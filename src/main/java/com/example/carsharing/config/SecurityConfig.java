@@ -1,9 +1,9 @@
 package com.example.carsharing.config;
 
 import com.example.carsharing.model.User;
-import com.example.carsharing.security.JwtConfigurer;
-import com.example.carsharing.security.JwtTokenFilter;
-import com.example.carsharing.security.JwtTokenProvider;
+import com.example.carsharing.security.jwt.JwtConfigurer;
+import com.example.carsharing.security.jwt.JwtTokenFilter;
+import com.example.carsharing.security.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
