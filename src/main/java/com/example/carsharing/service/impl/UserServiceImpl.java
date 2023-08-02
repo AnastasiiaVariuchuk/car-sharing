@@ -1,9 +1,9 @@
 package com.example.carsharing.service.impl;
 
-import java.util.NoSuchElementException;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.UserRepository;
 import com.example.carsharing.service.UserService;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateUserRole(Long id, User.Role role) {
         User userFromDb = userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Not found user with id: " + id)
+                () -> new NoSuchElementException("Not found user with id: " + id)
         );
         userFromDb.setRole(role);
         return userFromDb;
