@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RentalMapper {
-
     public Rental mapToEntity(RentalRequestDto rentalRequestDto) {
         Rental rental = new Rental();
 
