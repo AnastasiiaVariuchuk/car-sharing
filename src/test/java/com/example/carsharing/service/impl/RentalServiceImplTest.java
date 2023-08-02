@@ -8,8 +8,8 @@ import static org.mockito.Mockito.when;
 
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
-import com.example.carsharing.model.User;
 import com.example.carsharing.model.Rental;
+import com.example.carsharing.model.User;
 import com.example.carsharing.repository.RentalRepository;
 import com.example.carsharing.service.CarService;
 import com.example.carsharing.service.UserService;
@@ -72,13 +72,15 @@ public class RentalServiceImplTest {
         car.setInventory(0);
         when(carService.getById(CAR_ID)).thenReturn(car);
 
-        assertThrows(NotEnoughCarInventoryException.class, () -> rentalService.add(CAR_ID, USER_ID, LocalDateTime.now()));
+        assertThrows(NotEnoughCarInventoryException.class,
+                () -> rentalService.add(CAR_ID, USER_ID, LocalDateTime.now()));
     }
 
     @Test
     public void testGetByUserAndActiveness() {
         boolean isActive = true;
-        when(rentalRepository.findRentalByUserAndActualReturnDateIsNull(user)).thenReturn(List.of(new Rental()));
+        when(rentalRepository.findRentalByUserAndActualReturnDateIsNull(user))
+                .thenReturn(List.of(new Rental()));
         List<Rental> rentals = rentalService.getByUserAndActiveness(user, isActive);
         assertNotNull(rentals);
         assertFalse(rentals.isEmpty());
