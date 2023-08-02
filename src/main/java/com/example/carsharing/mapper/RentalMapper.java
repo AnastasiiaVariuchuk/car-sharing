@@ -11,6 +11,7 @@ public class RentalMapper {
 
     public Rental mapToEntity(RentalRequestDto rentalRequestDto) {
         Rental rental = new Rental();
+
         rental.setId(rentalRequestDto.getId());
         rental.setRentalDate(rentalRequestDto.getRentalDate());
         rental.setReturnDate(rentalRequestDto.getReturnDate());
