@@ -14,9 +14,21 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @RequiredArgsConstructor
 @Service
-public class NotificationsServiceImpl extends TelegramLongPollingBot implements NotificationsService {
+public class NotificationsServiceImpl extends TelegramLongPollingBot
+        implements NotificationsService {
     @Value("${telegram.bot.token}")
     private String token;
+
+    public static void registerBot() {
+        NotificationsServiceImpl bot = new NotificationsServiceImpl();
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(bot);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getBotUsername() {
         return "CarSharingNotsBot";
@@ -45,16 +57,6 @@ public class NotificationsServiceImpl extends TelegramLongPollingBot implements 
         message.setText(responseText);
         try {
             execute(message);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void registerBot() {
-        NotificationsServiceImpl bot = new NotificationsServiceImpl();
-        try {
-            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(bot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

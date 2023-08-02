@@ -1,6 +1,9 @@
 package com.example.carsharing.controller;
 
+<<<<<<< HEAD
 import com.example.carsharing.dto.SessionResponseDto;
+=======
+>>>>>>> main
 import com.example.carsharing.dto.request.RentalRequestDto;
 import com.example.carsharing.mapper.RentalMapper;
 import com.example.carsharing.model.Payment;
@@ -37,7 +40,8 @@ public class PaymentController {
     }
 
     @PostMapping
-    public Session createSession(@RequestBody RentalRequestDto rentalRequestDto) throws StripeException {
+    public Session createSession(@RequestBody RentalRequestDto rentalRequestDto)
+            throws StripeException {
         Rental rental = rentalMapper.mapToEntity(rentalRequestDto);
         Payment payment = new Payment();
         payment.setId(rental.getId());

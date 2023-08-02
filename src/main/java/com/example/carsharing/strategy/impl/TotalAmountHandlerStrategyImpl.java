@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class TotalAmountHandlerStrategyImpl implements TotalAmountHandlerStrategy {
-    List<TotalAmountHandler> amountHandlers;
+    private List<TotalAmountHandler> amountHandlers;
+
     @Override
     public TotalAmountHandler getToTalAmountHandler(Payment.Type type) {
         return amountHandlers.stream()
                 .filter(handler -> handler.isApplicable(type))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Can't find handler for payment " +
-                                                              "type: " + type.name()));
+                .orElseThrow(() -> new NoSuchElementException("Can't find handler for payment "
+                        + "type: " + type.name()));
     }
 }

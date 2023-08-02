@@ -1,9 +1,9 @@
 package com.example.carsharing.config;
 
 import com.example.carsharing.model.User;
-import com.example.carsharing.security.JwtConfigurer;
-import com.example.carsharing.security.JwtTokenFilter;
-import com.example.carsharing.security.JwtTokenProvider;
+import com.example.carsharing.security.jwt.JwtConfigurer;
+import com.example.carsharing.security.jwt.JwtTokenFilter;
+import com.example.carsharing.security.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -43,13 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register", "/inject", "/login").permitAll()
+                .antMatchers().permitAll()
+                .antMatchers("/register", "/inject", "/login", "/health", "/v2/api-docs",
+                        "/swagger-resources/**", "/swagger-ui.html",
+                        "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/cars/*", "/users/*")
                 .hasRole(User.Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
-        http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider),
+                UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

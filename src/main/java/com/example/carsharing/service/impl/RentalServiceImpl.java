@@ -1,8 +1,5 @@
 package com.example.carsharing.service.impl;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.NoSuchElementException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
@@ -10,13 +7,16 @@ import com.example.carsharing.repository.RentalRepository;
 import com.example.carsharing.service.CarService;
 import com.example.carsharing.service.RentalService;
 import com.example.carsharing.service.UserService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
-    private final int MIN_AMOUNT_TO_RENT = 1;
+    private static final int MIN_AMOUNT_TO_RENT = 1;
     private final RentalRepository rentalRepository;
     private final CarService carService;
     private final UserService userService;
@@ -24,7 +24,6 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental add(Long carId, Long userId, LocalDateTime returnDate) {
         Car car = carService.getById(carId);
-        User user = userService.getById(userId);
         if (car.getInventory() < MIN_AMOUNT_TO_RENT) {
             throw new RuntimeException("Can't rent car with id: " + carId);
         }
@@ -32,7 +31,7 @@ public class RentalServiceImpl implements RentalService {
         rental.setRentalDate(LocalDateTime.now());
         rental.setReturnDate(returnDate);
         rental.setCar(car);
-        rental.setUser(user);
+        rental.setUser(userService.getById(userId));
         return rentalRepository.save(rental);
     }
 
