@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(config = MapperConfig.class)
 public interface UserMapper {
     UserResponseDto mapToDto(User user);
+
     @Mapping(target = "id", ignore = true)
     User mapToEntity(UserRegistrationDto userDto);
 }

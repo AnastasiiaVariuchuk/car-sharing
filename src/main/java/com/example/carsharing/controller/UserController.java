@@ -5,7 +5,6 @@ import com.example.carsharing.dto.response.UserResponseDto;
 import com.example.carsharing.model.User;
 import com.example.carsharing.service.UserService;
 import com.example.carsharing.service.mapper.UserMapper;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +32,11 @@ public class UserController {
     public UserResponseDto getProfileInfo(Authentication authentication) {
         return userMapper.mapToDto(userService.getUserByEmail(authentication.getName()).get());
     }
+
     @PatchMapping("/me")
     public UserResponseDto updateProfileInfo(Authentication authentication,
                                              @RequestBody UserRegistrationDto userDto) {
-        Long userId= userService.getUserByEmail(authentication.getName()).get().getId();
+        Long userId = userService.getUserByEmail(authentication.getName()).get().getId();
 
         return userMapper.mapToDto(
                 userService.updateProfileInfo(
