@@ -11,6 +11,6 @@ public interface TotalAmountHandler {
     boolean isApplicable(Payment.Type type);
 
     default Long getRentHours(Rental rental) {
-        return rental.getRentalDate().until( rental.getActualReturnDate(), ChronoUnit.HOURS );
+        return rental.getRentalDate().until(rental.getActualReturnDate(), ChronoUnit.HOURS);
     }
 }

@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FineTotalAmountHandler implements TotalAmountHandler {
-    private static BigDecimal PER_HOUR = BigDecimal.valueOf(5);
-    private static BigDecimal FINE_MULTIPLIER = BigDecimal.valueOf(1.25);
+    private static final BigDecimal PER_HOUR = BigDecimal.valueOf(5);
+    private static final BigDecimal FINE_MULTIPLIER = BigDecimal.valueOf(1.25);
+
     @Override
     public BigDecimal getTotalAmount(Rental rental) {
         BigDecimal rentHours = BigDecimal.valueOf(getRentHours(rental));
