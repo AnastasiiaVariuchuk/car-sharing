@@ -1,9 +1,8 @@
 package com.example.carsharing.repository;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
