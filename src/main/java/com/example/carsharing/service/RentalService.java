@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RentalService {
+    Rental add(Rental rental);
+
     Rental add(Long carId, Long userId, LocalDateTime returnDate);
 
     List<Rental> getByUserAndActiveness(User user, boolean isActive);
