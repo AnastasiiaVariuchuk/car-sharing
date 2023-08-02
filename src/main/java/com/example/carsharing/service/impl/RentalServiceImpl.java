@@ -1,5 +1,6 @@
 package com.example.carsharing.service.impl;
 
+import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
@@ -30,7 +31,8 @@ public class RentalServiceImpl implements RentalService {
     public Rental add(Long carId, Long userId, LocalDateTime returnDate) {
         Car car = carService.getById(carId);
         if (car.getInventory() < MIN_AMOUNT_TO_RENT) {
-            throw new RuntimeException("Can't rent car with id: " + carId);
+            throw new NotEnoughCarInventoryException("Can't rent car with id: " + carId
+                    + ", not enough inventory: " + car.getInventory());
         }
         Rental rental = new Rental();
         rental.setRentalDate(LocalDateTime.now());
