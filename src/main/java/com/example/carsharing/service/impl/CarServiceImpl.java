@@ -20,22 +20,24 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAll() {
-        return (List<Car>) carRepository.findAll();
-    }
-
-    @Override
     public Car getById(Long id) {
         return carRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Not found car with id: " + id));
     }
 
     @Override
+    public List<Car> getAll() {
+        return (List<Car>) carRepository.findAll();
+    }
+
+    @Override
     @Transactional
     public Car update(Long id, Car car) {
+        if (car == null) {
+            throw new IllegalArgumentException("Car cannot be null");
+        }
         Car carFromDb = carRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Not found car with id: " + id));
-        carFromDb.setId(car.getId());
         carFromDb.setModel(car.getModel());
         carFromDb.setBrand(car.getBrand());
         carFromDb.setType(car.getType());
@@ -46,6 +48,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void delete(Long id) {
+        carRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Not found car with id: " + id));
         carRepository.deleteById(id);
     }
 }

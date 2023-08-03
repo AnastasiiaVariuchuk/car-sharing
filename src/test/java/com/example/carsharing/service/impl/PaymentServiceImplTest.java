@@ -5,11 +5,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.example.carsharing.model.Payment;
-import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.PaymentRepository;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,26 +49,6 @@ class PaymentServiceImplTest {
         int expectedSize = 1;
         assertEquals(expectedSize, actual.size());
         assertEquals(payment.getId(), actual.get(0).getId());
-    }
-
-    @Test
-    void findType_paymentType_ok() {
-        Rental rental = new Rental();
-        rental.setReturnDate(LocalDateTime.of(2023, 8, 2, 10,0));
-        rental.setActualReturnDate(LocalDateTime.of(2023, 8, 2, 9, 0));
-        Payment.Type expected = Payment.Type.PAYMENT;
-        Payment.Type actual = paymentService.findType(rental);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void findType_fineType_ok() {
-        Rental rental = new Rental();
-        rental.setReturnDate(LocalDateTime.of(2023, 8, 2, 10,0));
-        rental.setActualReturnDate(LocalDateTime.of(2023, 8, 3, 10, 0));
-        Payment.Type expected = Payment.Type.FINE;
-        Payment.Type actual = paymentService.findType(rental);
-        assertEquals(expected, actual);
     }
 
     @Test

@@ -11,7 +11,7 @@ public class PaymentTotalAmountHandler implements TotalAmountHandler {
 
     @Override
     public BigDecimal getTotalAmount(Rental rental, BigDecimal dailyFee) {
-        BigDecimal rentDays = BigDecimal.valueOf(getRentDays(rental));
+        BigDecimal rentDays = getRentDays(rental);
         return rentDays.multiply(dailyFee);
     }
 
