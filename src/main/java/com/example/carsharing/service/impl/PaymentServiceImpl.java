@@ -1,7 +1,6 @@
 package com.example.carsharing.service.impl;
 
 import com.example.carsharing.model.Payment;
-import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.PaymentRepository;
 import com.example.carsharing.service.PaymentService;
