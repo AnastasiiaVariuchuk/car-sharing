@@ -15,13 +15,21 @@ public class FineTotalAmountHandler implements TotalAmountHandler {
     @Override
     public BigDecimal getTotalAmount(Rental rental, BigDecimal dailyFee) {
         BigDecimal rentDays = getRentDays(rental);
-        BigDecimal finePay = getOverdueDays(rental).multiply(dailyFee).multiply(FINE_MULTIPLIER);
+        BigDecimal finePay = BigDecimal.ZERO;
+        if (isOverdue(rental)) {
+            finePay = getOverdueDays(rental).multiply(dailyFee)
+                    .multiply(FINE_MULTIPLIER);
+        }
         return rentDays.multiply(dailyFee).add(finePay);
     }
 
     private BigDecimal getOverdueDays(Rental rental) {
         return BigDecimal.valueOf(DAYS.between(rental.getReturnDate(),
                 rental.getActualReturnDate()));
+    }
+
+    private boolean isOverdue(Rental rental) {
+        return rental.getActualReturnDate().isAfter(rental.getReturnDate());
     }
 
     @Override
