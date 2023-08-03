@@ -1,14 +1,16 @@
 package com.example.carsharing.dto.request;
 
-import javax.validation.constraints.Size;
+import com.example.carsharing.lib.ValidEmail;
+import com.example.carsharing.lib.ValidPassword;
 import lombok.Data;
 
 @Data
+@ValidPassword
 public class UserRegistrationDto {
+    @ValidEmail
     private String email;
     private String firstName;
     private String lastName;
-    @Size(min = 8, max = 40)
     private String password;
     private String repeatPassword;
 }
