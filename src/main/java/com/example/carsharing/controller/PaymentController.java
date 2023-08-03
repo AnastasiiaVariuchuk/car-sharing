@@ -51,7 +51,6 @@ public class PaymentController {
             throws StripeException {
         Rental rental = rentalService.getById(paymentRequestDto.getRentalId());
         Payment payment = new Payment();
-        payment.setId(rental.getId());
         payment.setRental(rental);
         payment.setStatus(Payment.Status.PENDING);
         payment.setType(paymentRequestDto.getType());
