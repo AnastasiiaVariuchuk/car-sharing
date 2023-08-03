@@ -1,11 +1,5 @@
 package com.example.carsharing.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Rental;
@@ -13,10 +7,6 @@ import com.example.carsharing.model.User;
 import com.example.carsharing.repository.RentalRepository;
 import com.example.carsharing.service.CarService;
 import com.example.carsharing.service.UserService;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,10 +14,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 public class RentalServiceImplTest {
     public static final Long CAR_ID = 1L;
     public static final Long USER_ID = 2L;
+    public static final Long RENTAL_ID = 1L;
     @Mock
     private RentalRepository rentalRepository;
     @Mock
@@ -39,6 +39,7 @@ public class RentalServiceImplTest {
     private RentalServiceImpl rentalService;
     private Car car;
     private User user;
+    private Rental rental;
 
     @BeforeEach
     public void setUp() {
@@ -47,6 +48,9 @@ public class RentalServiceImplTest {
 
         user = new User();
         user.setId(USER_ID);
+
+        rental = new Rental();
+        rental.setId(RENTAL_ID);
     }
 
     @Test
@@ -88,16 +92,14 @@ public class RentalServiceImplTest {
 
     @Test
     public void testGetById() {
-        Long rentalId = 1L;
-        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(new Rental()));
-        Rental rental = rentalService.getById(rentalId);
+        when(rentalRepository.findById(RENTAL_ID)).thenReturn(Optional.of(new Rental()));
+        Rental rental = rentalService.getById(RENTAL_ID);
         assertNotNull(rental);
     }
 
     @Test
     public void testGetById_NotFound() {
-        Long rentalId = 1L;
-        when(rentalRepository.findById(rentalId)).thenReturn(Optional.empty());
-        assertThrows(NoSuchElementException.class, () -> rentalService.getById(rentalId));
+        when(rentalRepository.findById(RENTAL_ID)).thenReturn(Optional.empty());
+        assertThrows(NoSuchElementException.class, () -> rentalService.getById(RENTAL_ID));
     }
 }
