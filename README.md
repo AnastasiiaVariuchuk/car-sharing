@@ -5,14 +5,16 @@ The Car Sharing Service is a web application that allows users to rent cars from
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
+- [Technologies Used](#-technologies-used)
+- [Getting Started](#-getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-- [API Endpoints and permissions](#api-endpoints)
-- [Telegram Notifications](#telegram-notifications)
-- [Testing](#testing)
-- [Contribution Guidelines](#contribution-guidelines)
+- [Project architecture](#-project-architecture)
+- [Database structure](#-database-structure)
+- [API Endpoints and permissions](#-api-endpoints)
+- [Telegram Notifications](#-telegram-notifications)
+- [Contribution Guidelines](#-contribution-guidelines)
+
 
 ## Introduction
 
@@ -54,6 +56,11 @@ Before running the Car Sharing Service, ensure you have the following installed:
    `docker-compose up --build`.
 
 4. The application should now be running at `http://localhost:8080`.
+
+
+## 🏗️ Project architecture
+![Screenshot](assets/architecture.png)
+
 
 ## 💾 Database structure
 ![Screenshot](assets/car-sharing.png)
