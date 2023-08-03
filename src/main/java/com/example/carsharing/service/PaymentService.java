@@ -12,5 +12,5 @@ public interface PaymentService {
 
     Payment.Type findType(Rental rental);
 
-    void setPaid(String sessionId);
+    Payment setPaid(String sessionId);
 }

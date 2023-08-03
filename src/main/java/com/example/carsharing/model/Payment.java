@@ -33,6 +33,13 @@ public class Payment {
     private String sessionId;
     private BigDecimal amountToPay;
 
+    public Payment() {
+    }
+
+    public Payment(Long id) {
+        this.id = id;
+    }
+
     public enum Status {
         PENDING, PAID
     }

@@ -29,9 +29,9 @@ public class CarController {
     public CarResponseDto add(@RequestBody CarRequestDto carRequestDto) {
         return carMapper.mapToDto(carService.add(carMapper.mapToEntity(carRequestDto)));
     }
-    // GET /cars
+    // GET /cars/
 
-    @GetMapping
+    @GetMapping("/")
     public List<CarResponseDto> getAll() {
         return carService.getAll().stream()
                 .map(carMapper::mapToDto)
