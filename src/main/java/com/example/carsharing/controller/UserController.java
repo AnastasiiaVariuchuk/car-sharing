@@ -25,21 +25,21 @@ public class UserController {
 
     @PutMapping("/{id}/role")
     public UserResponseDto updateRole(@PathVariable Long id, @RequestParam User.Role role) {
-        return userMapper.mapToDto(userService.updateUserRole(id, role));
+        return userMapper.mapToDto(userService.updateRole(id, role));
     }
 
     @GetMapping("/me")
     public UserResponseDto getProfileInfo(Authentication authentication) {
-        return userMapper.mapToDto(userService.getUserByEmail(authentication.getName()).get());
+        return userMapper.mapToDto(userService.getByEmail(authentication.getName()).get());
     }
 
     @PatchMapping("/me")
     public UserResponseDto updateProfileInfo(Authentication authentication,
                                              @RequestBody UserRegistrationDto userDto) {
-        Long userId = userService.getUserByEmail(authentication.getName()).get().getId();
+        Long userId = userService.getByEmail(authentication.getName()).get().getId();
 
         return userMapper.mapToDto(
-                userService.updateProfileInfo(
+                userService.update(
                         userMapper.mapToEntity(userDto).setId(userId)
                 )
         );

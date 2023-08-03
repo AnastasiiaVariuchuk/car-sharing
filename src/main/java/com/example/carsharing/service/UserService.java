@@ -8,11 +8,11 @@ public interface UserService {
 
     User getById(Long userId);
 
-    Optional<User> getUserByEmail(String email);
+    Optional<User> getByEmail(String email);
 
-    boolean isUserPresentByEmail(String email);
+    boolean isPresentByEmail(String email);
 
-    User updateUserRole(Long id, User.Role role);
+    User updateRole(Long id, User.Role role);
 
-    User updateProfileInfo(User user);
+    User update(User user);
 }
