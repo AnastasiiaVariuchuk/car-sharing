@@ -44,10 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register", "/inject", "/login", "/health", "/v2/api-docs",
                         "/swagger-resources/**", "/swagger-ui.html",
-                        "/webjars/**").permitAll()
+                        "/webjars/**", "/payments/**","/cars").permitAll()
+                .antMatchers(HttpMethod.POST, "/cars").hasRole(User.Role.MANAGER.name())
+                .antMatchers("/cars/*").hasRole(User.Role.MANAGER.name())
                 .antMatchers(HttpMethod.DELETE, "/cars/*", "/users/*")
                 .hasRole(User.Role.MANAGER.name())
-                .antMatchers(HttpMethod.PUT, "/users/**/role").hasRole(User.Role.MANAGER.name())
+                .antMatchers(HttpMethod.PUT, "/users/*/role").hasRole(User.Role.MANAGER.name())
+                .antMatchers(HttpMethod.PATCH, "/cars/*").hasRole(User.Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
