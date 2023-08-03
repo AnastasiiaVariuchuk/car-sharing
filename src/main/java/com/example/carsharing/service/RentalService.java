@@ -2,13 +2,10 @@ package com.example.carsharing.service;
 
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RentalService {
-    Rental add(Rental rental);
-
-    Rental add(Long carId, Long userId, LocalDateTime returnDate);
+    Rental add(Rental requestRental);
 
     List<Rental> getByUserAndActiveness(User user, boolean isActive);
 
