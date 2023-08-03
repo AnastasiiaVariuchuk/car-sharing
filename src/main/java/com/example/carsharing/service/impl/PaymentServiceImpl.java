@@ -35,8 +35,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public void setPaid(String sessionId) {
+    public Payment setPaid(String sessionId) {
         Payment payment = paymentRepository.getBySessionId(sessionId);
         payment.setStatus(Payment.Status.PAID);
+        return payment;
     }
 }
