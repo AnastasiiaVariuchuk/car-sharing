@@ -45,7 +45,7 @@ public class RentalServiceImplTest {
     @BeforeEach
     public void setUp() {
         car = new Car();
-        car.setId(USER_ID);
+        car.setId(CAR_ID);
 
         user = new User();
         user.setId(USER_ID);
@@ -63,7 +63,11 @@ public class RentalServiceImplTest {
         when(rentalRepository.save(any(Rental.class))).thenReturn(new Rental());
 
         //When
-        Rental rental = rentalService.add(CAR_ID, USER_ID, LocalDateTime.now());
+        Rental requestedRental = new Rental();
+        requestedRental.setCar(car);
+        requestedRental.setUser(user);
+        requestedRental.setReturnDate(LocalDateTime.now());
+        Rental rental = rentalService.add(requestedRental);
 
         //Then
         assertNotNull(rental);
@@ -73,9 +77,13 @@ public class RentalServiceImplTest {
     public void add_notEnoughCarInventory_ok() {
         car.setInventory(0);
         when(carService.getById(CAR_ID)).thenReturn(car);
+        Rental requestedRental = new Rental();
+        requestedRental.setCar(car);
+        requestedRental.setUser(user);
+        requestedRental.setReturnDate(LocalDateTime.now());
 
         assertThrows(NotEnoughCarInventoryException.class,
-                () -> rentalService.add(CAR_ID, USER_ID, LocalDateTime.now()));
+                () -> rentalService.add(requestedRental));
     }
 
     @Test

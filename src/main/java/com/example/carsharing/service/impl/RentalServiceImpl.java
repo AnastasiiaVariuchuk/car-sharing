@@ -23,14 +23,9 @@ public class RentalServiceImpl implements RentalService {
     private final CarService carService;
     private final UserService userService;
 
-    // ?
     @Override
-    public Rental add(Rental rental) {
-        return rentalRepository.save(rental);
-    }
-
-    @Override
-    public Rental add(Long carId, Long userId, LocalDateTime returnDate) {
+    public Rental add(Rental requestRental) {
+        Long carId = requestRental.getCar().getId();
         Car car = carService.getById(carId);
         if (car.getInventory() < MIN_AMOUNT_TO_RENT) {
             throw new NotEnoughCarInventoryException("Can't rent car with id: " + carId
@@ -38,9 +33,9 @@ public class RentalServiceImpl implements RentalService {
         }
         Rental rental = new Rental();
         rental.setRentalDate(LocalDateTime.now());
-        rental.setReturnDate(returnDate);
+        rental.setReturnDate(requestRental.getReturnDate());
         rental.setCar(car);
-        rental.setUser(userService.getById(userId));
+        rental.setUser(userService.getById(requestRental.getUser().getId()));
         return rentalRepository.save(rental);
     }
 
