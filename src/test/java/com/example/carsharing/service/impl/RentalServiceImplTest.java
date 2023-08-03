@@ -28,6 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class RentalServiceImplTest {
     public static final Long CAR_ID = 1L;
     public static final Long USER_ID = 2L;
+    public static final Long RENTAL_ID = 1L;
     @Mock
     private RentalRepository rentalRepository;
     @Mock
@@ -39,6 +40,7 @@ public class RentalServiceImplTest {
     private RentalServiceImpl rentalService;
     private Car car;
     private User user;
+    private Rental rental;
 
     @BeforeEach
     public void setUp() {
@@ -47,6 +49,9 @@ public class RentalServiceImplTest {
 
         user = new User();
         user.setId(USER_ID);
+
+        rental = new Rental();
+        rental.setId(RENTAL_ID);
     }
 
     @Test
@@ -88,16 +93,14 @@ public class RentalServiceImplTest {
 
     @Test
     public void testGetById() {
-        Long rentalId = 1L;
-        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(new Rental()));
-        Rental rental = rentalService.getById(rentalId);
+        when(rentalRepository.findById(RENTAL_ID)).thenReturn(Optional.of(new Rental()));
+        Rental rental = rentalService.getById(RENTAL_ID);
         assertNotNull(rental);
     }
 
     @Test
     public void testGetById_NotFound() {
-        Long rentalId = 1L;
-        when(rentalRepository.findById(rentalId)).thenReturn(Optional.empty());
-        assertThrows(NoSuchElementException.class, () -> rentalService.getById(rentalId));
+        when(rentalRepository.findById(RENTAL_ID)).thenReturn(Optional.empty());
+        assertThrows(NoSuchElementException.class, () -> rentalService.getById(RENTAL_ID));
     }
 }
