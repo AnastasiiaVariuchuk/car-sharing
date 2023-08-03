@@ -16,8 +16,6 @@ import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static java.math.BigInteger.ONE;
-
 @Service
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
