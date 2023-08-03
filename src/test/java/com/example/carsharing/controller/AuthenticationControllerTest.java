@@ -24,7 +24,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @ExtendWith(MockitoExtension.class)
-
 class AuthenticationControllerTest {
     @Mock
     private AuthenticationService authService;
@@ -66,7 +65,6 @@ class AuthenticationControllerTest {
         userResponseDto.setFirstName(user.getFirstName());
         userResponseDto.setLastName(user.getLastName());
         userResponseDto.setRole(user.getRole().name());
-
     }
 
     @Test
