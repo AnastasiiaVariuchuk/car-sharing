@@ -68,7 +68,7 @@ class JwtTokenProviderTest {
         user.setPassword(PASSWORD);
         user.setRole(User.Role.CUSTOMER);
         Mockito.doReturn(EMAIL).when(jwtTokenProvider).getUsername(TOKEN);
-        Mockito.when(userService.getUserByEmail(EMAIL)).thenReturn(Optional.of(user));
+        Mockito.when(userService.getByEmail(EMAIL)).thenReturn(Optional.of(user));
         Authentication authentication = jwtTokenProvider.getAuthentication(TOKEN);
         assertNotNull(authentication);
     }

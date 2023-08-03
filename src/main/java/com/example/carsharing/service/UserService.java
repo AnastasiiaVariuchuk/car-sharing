@@ -8,7 +8,7 @@ public interface UserService {
 
     User getById(Long userId);
 
-    Optional<User> getUserByEmail(String email);
+    Optional<User> getByEmail(String email);
 
     boolean isUserPresentByEmail(String email);
 
