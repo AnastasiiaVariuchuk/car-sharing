@@ -55,8 +55,8 @@ public class RentalServiceImpl implements RentalService {
     public Rental terminate(Long id) {
         Rental rental = getById(id);
         if (rental.getActualReturnDate() != null) {
-            throw new AlreadyTerminatedRentalException("Rental with id " + id + " already " +
-                    "terminated");
+            throw new AlreadyTerminatedRentalException("Rental with id " + id + " already "
+                    + "terminated");
         }
         rental.setActualReturnDate(LocalDateTime.now());
         rentalRepository.save(rental);
