@@ -1,11 +1,13 @@
 package com.example.carsharing.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.example.carsharing.exception.AlreadyTerminatedRentalException;
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Rental;
@@ -50,7 +52,7 @@ public class RentalServiceImplTest {
     }
 
     @Test
-    public void testAddRental() {
+    public void add_enoughCarInventory_ok() {
         //Given
         car.setInventory(2);
 
@@ -68,7 +70,7 @@ public class RentalServiceImplTest {
     }
 
     @Test
-    public void testAddRentalWhenInventoryIsNotEnough() {
+    public void add_notEnoughCarInventory_ok() {
         car.setInventory(0);
         when(carService.getById(CAR_ID)).thenReturn(car);
 
@@ -77,7 +79,7 @@ public class RentalServiceImplTest {
     }
 
     @Test
-    public void testGetByUserAndActiveness() {
+    public void getByUserAndActiveness_rentalIsActive_ok() {
         boolean isActive = true;
         when(rentalRepository.findRentalByUserAndActualReturnDateIsNull(user))
                 .thenReturn(List.of(new Rental()));
@@ -87,7 +89,17 @@ public class RentalServiceImplTest {
     }
 
     @Test
-    public void testGetById() {
+    public void getByUserAndActiveness_rentalIsNotActive_ok() {
+        boolean isActive = false;
+        when(rentalRepository.findRentalByUserAndActualReturnDateIsNotNull(user))
+                .thenReturn(List.of(new Rental()));
+        List<Rental> rentals = rentalService.getByUserAndActiveness(user, isActive);
+        assertNotNull(rentals);
+        assertFalse(rentals.isEmpty());
+    }
+
+    @Test
+    public void getById_rentalIsPresentInRepositoryById_ok() {
         Long rentalId = 1L;
         when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(new Rental()));
         Rental rental = rentalService.getById(rentalId);
@@ -95,9 +107,32 @@ public class RentalServiceImplTest {
     }
 
     @Test
-    public void testGetById_NotFound() {
+    public void getById_rentalIsAbsentInRepositoryById_notOk() {
         Long rentalId = 1L;
         when(rentalRepository.findById(rentalId)).thenReturn(Optional.empty());
         assertThrows(NoSuchElementException.class, () -> rentalService.getById(rentalId));
+    }
+
+    @Test
+    public void terminate_rentalIsAlreadyTerminated_notOk() {
+        Long rentalId = 1L;
+        Rental rental = new Rental();
+        rental.setId(rentalId);
+        rental.setActualReturnDate(LocalDateTime.now());
+        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(rental));
+        assertThrows(AlreadyTerminatedRentalException.class,
+                () -> rentalService.terminate(rentalId));
+    }
+
+    @Test
+    public void terminate_rentalIsNotTerminated_ok() {
+        Long rentalId = 1L;
+        Rental rental = new Rental();
+        Car car = new Car();
+        car.setInventory(1);
+        rental.setCar(car);
+        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(rental));
+        Rental terminatedRental = rentalService.terminate(rentalId);
+        assertEquals(rental, terminatedRental);
     }
 }

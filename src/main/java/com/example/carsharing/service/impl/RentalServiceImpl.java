@@ -1,5 +1,6 @@
 package com.example.carsharing.service.impl;
 
+import com.example.carsharing.exception.AlreadyTerminatedRentalException;
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Rental;
@@ -22,6 +23,7 @@ public class RentalServiceImpl implements RentalService {
     private final CarService carService;
     private final UserService userService;
 
+    // ?
     @Override
     public Rental add(Rental rental) {
         return rentalRepository.save(rental);
@@ -58,7 +60,8 @@ public class RentalServiceImpl implements RentalService {
     public Rental terminate(Long id) {
         Rental rental = getById(id);
         if (rental.getActualReturnDate() != null) {
-            throw new RuntimeException("Rental with id " + id + " already terminated");
+            throw new AlreadyTerminatedRentalException("Rental with id " + id + " already " +
+                    "terminated");
         }
         rental.setActualReturnDate(LocalDateTime.now());
         rentalRepository.save(rental);
