@@ -14,7 +14,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "cars")
 public class Car {
