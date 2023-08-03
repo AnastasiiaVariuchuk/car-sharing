@@ -12,6 +12,7 @@ public interface TotalAmountHandler {
     boolean isApplicable(Payment.Type type);
 
     default BigDecimal getRentDays(Rental rental) {
-        return BigDecimal.valueOf(DAYS.between(rental.getRentalDate(), rental.getReturnDate()));
+        return BigDecimal.valueOf(DAYS.between(rental.getRentalDate(), rental.getReturnDate()))
+                .add(BigDecimal.ONE);
     }
 }
