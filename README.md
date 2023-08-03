@@ -15,6 +15,7 @@ The Car Sharing Service is a web application that allows users to rent cars from
 - [Telegram Notifications](#-telegram-notifications)
 - [Contribution Guidelines](#-contribution-guidelines)
 
+
 ## Introduction
 
 The Car Sharing Service aims to provide an efficient and user-friendly platform for renting cars. It caters to both customers and administrators, allowing customers to browse available cars, make reservations, and process payments securely, while administrators can manage car inventory, user roles, and track payments.
@@ -56,8 +57,10 @@ Before running the Car Sharing Service, ensure you have the following installed:
 
 4. The application should now be running at `http://localhost:8080`.
 
+
 ## 🏗️ Project architecture
 ![Screenshot](assets/architecture.png)
+
 
 ## 💾 Database structure
 ![Screenshot](assets/car-sharing.png)
