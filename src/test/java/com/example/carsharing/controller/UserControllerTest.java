@@ -1,22 +1,21 @@
 package com.example.carsharing.controller;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
 import com.example.carsharing.dto.request.UserRegistrationDto;
 import com.example.carsharing.dto.response.UserResponseDto;
 import com.example.carsharing.model.User;
 import com.example.carsharing.service.UserService;
 import com.example.carsharing.service.mapper.UserMapper;
-import org.springframework.security.core.Authentication;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import org.springframework.security.core.Authentication;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
