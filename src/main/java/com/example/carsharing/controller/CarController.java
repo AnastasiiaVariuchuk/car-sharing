@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,24 +37,24 @@ public class CarController {
                 .map(carMapper::mapToDto)
                 .toList();
     }
-    // GET /cars?car_id=<id>
+    // GET /cars/{id}
 
-    @GetMapping
-    public CarResponseDto getDetailedInfo(@RequestParam("car_id") Long carId) {
-        return carMapper.mapToDto(carService.getById(carId));
+    @GetMapping("/{id}")
+    public CarResponseDto getDetailedInfo(@PathVariable Long id) {
+        return carMapper.mapToDto(carService.getById(id));
     }
-    // PATCH /cars?car_id=<id>
+    // PATCH /cars/{id}
 
-    @PatchMapping
-    public CarResponseDto updateCar(@RequestParam("car_id") Long carId,
+    @PatchMapping("/{id}")
+    public CarResponseDto updateCar(@PathVariable Long id,
                                     @RequestBody CarRequestDto carRequestDto) {
-        return carMapper.mapToDto(carService.update(carId, carMapper.mapToEntity(carRequestDto)));
+        return carMapper.mapToDto(carService.update(id, carMapper.mapToEntity(carRequestDto)));
     }
-    //DELETE / cars?car_id=<id>
+    //DELETE / cars/{id}
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestParam("car_id") Long carId) {
-        carService.delete(carId);
+    public void delete(@PathVariable Long id) {
+        carService.delete(id);
     }
 }
