@@ -1,73 +1,40 @@
-# 🚗 Car Sharing Service 🚗
+# <h1 align="center"> <img src="https://em-content.zobj.net/thumbs/120/apple/354/racing-car_1f3ce-fe0f.png" width="35"/> Car Sharing Service <img src="https://em-content.zobj.net/thumbs/120/apple/354/racing-car_1f3ce-fe0f.png" width="35"/> </h1>
+#### <h4 align="center"> `Faster than you've ever seen` </h4>
 
-The Car Sharing Service is a web application that allows users to rent cars from a car sharing service. It provides a set of APIs for managing cars, users, rentals, and payments. The service also offers Telegram notifications for new rentals and overdue rentals, as well as integration with Stripe for payment processing.
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/raising-hands_1f64c.png" width="25"/> Introduction
+`The Car Sharing Service aims to provide an efficient and user-friendly platform for renting cars. It caters to both customers and administrators, allowing customers to browse available cars, make reservations, and process payments securely, while administrators can manage car inventory, user roles, and track payments`
 
-## Table of Contents
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/laptop_1f4bb.png" width="25"/> Technologies Used
+`The following technologies are used to build the Car Sharing Service:`
+- <img src="https://image.emojipng.com/677/13219677.jpg" width="30"/> **Java**: The primary programming language used for the application.
+- <img src="https://media.trustradius.com/product-logos/9B/8G/IMJEF6VWC74S.PNG" width="30"/> **Spring Boot**: A powerful framework that provides essential features for building web applications.
+- <img src="https://media.trustradius.com/product-logos/9B/8G/IMJEF6VWC74S.PNG" width="30"/> **Spring Data JPA**: Simplifies data access and persistence with JPA (Java Persistence API).
+- <img src="https://media.trustradius.com/product-logos/9B/8G/IMJEF6VWC74S.PNG" width="30"/> **Spring Security**: Enables robust and secure authentication and authorization mechanisms.
+- <img src="https://t1.gstatic.com/images?q=tbn:ANd9GcSPbQehl7jW6cT9MZXqOeA4FNWqVNkOThwpkukkugx0lD1EhpIH" width="30"/> **Swagger**: Provides API documentation.
+- <img src="https://w7.pngwing.com/pngs/464/18/png-transparent-mysql-database-innodb-postgresql-column-marine-mammal-electric-blue-postgresql-thumbnail.png" width="30"/> **MySQL**: The database management system used for data storage.
+- <img src="https://t2.gstatic.com/images?q=tbn:ANd9GcQY7YDz2atjZ4SUnF-rkVAAMh0Rq5gOA4v9I4D2WRZHccPlacGo" width="30"/> **Telegram API**: Used to send notifications to administrators via Telegram.
+- <img src="https://cdn.freebiesupply.com/logos/large/2x/docker-logo-png-transparent.png" width="35"/>  **Docker**: Used for containerization of the application and database.
+- <img src="https://cdn.dribbble.com/users/920/screenshots/1675816/stripe.png?resize=400x300&vertical=center" width="35"/> **Stripe API**: Integrated with Stripe for secure payment processing.
+- <img src="https://velog.velcdn.com/images/gloom/post/17bae182-7380-43e0-a45e-fff76b8ba9c7/image.png" width="35"/> **Lombok**: Reduces boilerplate code with annotations.
+- <img src="https://trguduru.github.io/img/mapstruct.png" width="35"/> **MapStruct**: Simplifies object mapping between DTOs and entities.
 
-- [Introduction](#introduction)
-- [Technologies Used](#-technologies-used)
-- [Getting Started](#-getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-- [Project architecture](#-project-architecture)
-- [Database structure](#-database-structure)
-- [API Endpoints and permissions](#-api-endpoints)
-- [Telegram Notifications](#-telegram-notifications)
-- [Contribution Guidelines](#-contribution-guidelines)
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/rocket_1f680.png" width="25"/> Getting Started
+`Before running the Car Sharing Service, ensure you have the following installed:`
+- <img src="https://image.emojipng.com/677/13219677.jpg" width="30"/> Java Development Kit (JDK)
+- <img src="https://cdn.freebiesupply.com/logos/large/2x/docker-logo-png-transparent.png" width="35"/> Docker and Docker Compose
 
-
-## Introduction
-
-The Car Sharing Service aims to provide an efficient and user-friendly platform for renting cars. It caters to both customers and administrators, allowing customers to browse available cars, make reservations, and process payments securely, while administrators can manage car inventory, user roles, and track payments.
-
-## 💻 Technologies Used
-
-The following technologies are used to build the Car Sharing Service:
-
-- **Java**: The primary programming language used for the application.
-- **Spring Boot**: A powerful framework that provides essential features for building web applications.
-- **Spring Data JPA**: Simplifies data access and persistence with JPA (Java Persistence API).
-- **Spring Security**: Enables robust and secure authentication and authorization mechanisms.
-- **MySQL**: The database management system used for data storage.
-- **Stripe API**: Integrated with Stripe for secure payment processing.
-- **Telegram API**: Used to send notifications to administrators via Telegram.
-- **MapStruct**: Simplifies object mapping between DTOs and entities.
-- **Docker**: Used for containerization of the application and database.
-- **Lombok**: Reduces boilerplate code with annotations.
-- **Swagger**: Provides API documentation.
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Before running the Car Sharing Service, ensure you have the following installed:
-
-- Java Development Kit (JDK)
-- Docker and Docker Compose
-
-### Installation
-
+`Follow the steps below to install:`
 1. Clone the repository from GitHub and navigate to the project directory.
-
 2. Create a `.env` file with the necessary environment variables. (See `.env.sample` for a sample.)
-
 3. Run the following command to build and start the Docker containers:
-
    `docker-compose up --build`.
-
 4. The application should now be running at `http://localhost:8080`.
 
-
-## 🏗️ Project architecture
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/building-construction_1f3d7-fe0f.png" width="25"/> Project architecture:
 ![Screenshot](assets/architecture.png)
 
-
-## 💾 Database structure
-![Screenshot](assets/car-sharing.png)
-
-## 🔗 API Endpoints
-
-The Car Sharing Service provides the following API endpoints:
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/link_1f517.png" width="25"/> API Endpoints
+`The Car Sharing Service provides the following API endpoints:`
 
 <!-- Fill in the details for each endpoint as per your project's requirements -->
 
@@ -92,16 +59,12 @@ The Car Sharing Service provides the following API endpoints:
 | GET             | /payments/success              | ALL        | Endpoint for handling successful Stripe payments. |
 | GET             | /payments/cancel               | ALL        | Endpoint for handling canceled Stripe payments.  |
 
-## 🤖 Telegram Notifications
-
-The Car Sharing Service sends Telegram notifications for the following events:
-
+### <img src="https://em-content.zobj.net/thumbs/160/apple/354/mechanical-arm_1f9be.png" width="25"/> Telegram Notifications
+`The Car Sharing Service sends Telegram notifications for the following events:`
 - New rental created: Notifications are sent to all service administrators.
 - Overdue rental: If a rental is overdue (return date is in the past, and the car is still not returned), notifications are sent to all service administrators.
 
-## 📄 Contribution Guidelines
+### <img src="https://em-content.zobj.net/thumbs/120/apple/354/card-file-box_1f5c3-fe0f.png" width="25"/> Contribution Guidelines
+`We welcome contributions to this project:`
 
-We welcome contributions to this project. Please create a new branch for each feature or bug fix and submit a pull request to the `main` branch. All PRs must be reviewed and approved by at least two team members before merging.
-
-
-
+Please create a new branch for each feature or bug fix and submit a pull request to the `main` branch. All PRs must be reviewed and approved by at least two team members before merging.
