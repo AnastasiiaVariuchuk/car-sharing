@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User add(User user) {
         if (userRepository.getUserByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("User already exists with email: " + user.getEmail());
+            throw new IllegalArgumentException("User already exists with email: "
+                    + user.getEmail());
         }
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
