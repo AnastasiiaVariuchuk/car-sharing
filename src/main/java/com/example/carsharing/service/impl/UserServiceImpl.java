@@ -19,6 +19,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User add(User user) {
+        if (userRepository.getUserByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("User already exists with email: "
+                    + user.getEmail());
+        }
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
@@ -31,18 +35,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
 
     @Override
-    public boolean isUserPresentByEmail(String email) {
+    public boolean isPresentByEmail(String email) {
         return userRepository.getUserByEmail(email).isPresent();
     }
 
     @Override
     @Transactional
-    public User updateUserRole(Long id, User.Role role) {
+    public User updateRole(Long id, User.Role role) {
         User userFromDb = userRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Not found user with id: " + id)
         );
@@ -52,9 +56,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updateProfileInfo(User user) {
+    public User update(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
         User userFromDb = userRepository.findById(user.getId()).orElseThrow(
-                () -> new RuntimeException("Not found profile info for user: " + user));
+                () -> new NoSuchElementException("Not found profile info for user: " + user));
         userFromDb.setId(user.getId())
                 .setEmail(user.getEmail())
                 .setFirstName(user.getFirstName())
