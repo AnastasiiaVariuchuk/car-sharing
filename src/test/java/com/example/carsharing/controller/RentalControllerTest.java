@@ -1,27 +1,25 @@
 package com.example.carsharing.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.when;
+
 import com.example.carsharing.dto.request.RentalRequestDto;
 import com.example.carsharing.dto.response.RentalResponseDto;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
 import com.example.carsharing.service.RentalService;
 import com.example.carsharing.service.mapper.RentalMapper;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RentalControllerTest {
@@ -56,9 +54,11 @@ class RentalControllerTest {
     @Test
     void getRentals_validParams_ok() {
         List<Rental> rentals = List.of(rental);
-        when(rentalService.getByUserAndActiveness(any(User.class), anyBoolean())).thenReturn(rentals);
+        when(rentalService.getByUserAndActiveness(any(User.class),
+                anyBoolean())).thenReturn(rentals);
         when(rentalMapper.mapToDto(any(Rental.class))).thenReturn(rentalResponseDto);
-        ResponseEntity<List<RentalResponseDto>> response = rentalController.getRentals(1L, true);
+        ResponseEntity<List<RentalResponseDto>> response =
+                rentalController.getRentals(1L, true);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(List.of(rentalResponseDto), response.getBody());
     }
