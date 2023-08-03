@@ -9,13 +9,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 import com.example.carsharing.model.User;
 import com.example.carsharing.security.CustomUserDetailsService;
 import com.example.carsharing.service.UserService;
-
-import java.util.*;
-import javax.servlet.http.HttpServletRequest;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;

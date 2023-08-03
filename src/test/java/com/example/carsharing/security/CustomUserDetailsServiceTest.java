@@ -6,19 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
-import java.util.Set;
-
 import com.example.carsharing.model.User;
-import com.example.carsharing.security.CustomUserDetailsService;
 import com.example.carsharing.service.UserService;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import javax.management.relation.Role;
 
 class CustomUserDetailsServiceTest {
     private static final String EMAIL = "bob@i.ua";
