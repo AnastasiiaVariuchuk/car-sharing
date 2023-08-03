@@ -27,6 +27,7 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+    @ToString.Exclude
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
