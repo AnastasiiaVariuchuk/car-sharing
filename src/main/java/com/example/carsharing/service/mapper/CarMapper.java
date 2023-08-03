@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 @Mapper(config = MapperConfig.class)
 public interface CarMapper {
     Car mapToEntity(CarRequestDto carRequestDto);
+
     CarResponseDto mapToDto(Car car);
 }

@@ -24,11 +24,13 @@ public class CarController {
     private CarService carService;
     private CarMapper carMapper;
     // POST /cars
+
     @PostMapping
     public CarResponseDto add(@RequestBody CarRequestDto carRequestDto) {
         return carMapper.mapToDto(carService.add(carMapper.mapToEntity(carRequestDto)));
     }
     // GET /cars
+
     @GetMapping
     public List<CarResponseDto> getAll() {
         return carService.getAll().stream()
@@ -36,17 +38,20 @@ public class CarController {
                 .toList();
     }
     // GET /cars?car_id=<id>
+
     @GetMapping
     public CarResponseDto getDetailedInfo(@RequestParam("car_id") Long carId) {
         return carMapper.mapToDto(carService.getById(carId));
     }
     // PATCH /cars?car_id=<id>
+
     @PatchMapping
     public CarResponseDto updateCar(@RequestParam("car_id") Long carId,
                                     @RequestBody CarRequestDto carRequestDto) {
         return carMapper.mapToDto(carService.update(carId, carMapper.mapToEntity(carRequestDto)));
     }
     //DELETE / cars?car_id=<id>
+
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void delete(@RequestParam("car_id") Long carId) {
