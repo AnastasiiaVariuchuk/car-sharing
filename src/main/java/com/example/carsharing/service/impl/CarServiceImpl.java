@@ -16,10 +16,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car add(Car car) {
-        if (carRepository.findById(car.getId()).isPresent()) {
-            throw new IllegalArgumentException("Car already exists with id: "
-                    + car.getId());
-        }
         return carRepository.save(car);
     }
 

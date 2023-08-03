@@ -123,13 +123,6 @@ public class CarServiceImplTest {
     }
 
     @Test
-    void add_carAlreadyExists_notOk() {
-        when(carRepository.findById(CAR_ID)).thenReturn(Optional.of(car));
-        assertThrows(IllegalArgumentException.class, () -> carService.add(car));
-        verify(carRepository, never()).save(any(Car.class));
-    }
-
-    @Test
     void getById_carDoesNotExist_notOk() {
         when(carRepository.findById(CAR_ID)).thenReturn(Optional.empty());
         assertThrows(NoSuchElementException.class, () -> carService.getById(CAR_ID));
