@@ -55,7 +55,7 @@ public class PaymentController {
         payment.setType(paymentService.findType(rental));
         Car car = rental.getCar();
         payment.setAmountToPay(strategy.getToTalAmountHandler(payment.getType())
-                .getTotalAmount(rental, car));
+                .getTotalAmount(rental, car.getDailyFee()));
         Session session = paymentProvider.createSession(payment, car);
         payment.setSessionId(session.getId());
         payment.setSessionUrl(session.getUrl());

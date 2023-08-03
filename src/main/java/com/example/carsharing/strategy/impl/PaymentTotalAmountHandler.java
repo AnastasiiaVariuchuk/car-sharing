@@ -1,6 +1,5 @@
 package com.example.carsharing.strategy.impl;
 
-import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.strategy.TotalAmountHandler;
@@ -11,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class PaymentTotalAmountHandler implements TotalAmountHandler {
 
     @Override
-    public BigDecimal getTotalAmount(Rental rental, Car car) {
+    public BigDecimal getTotalAmount(Rental rental, BigDecimal dailyFee) {
         BigDecimal rentDays = BigDecimal.valueOf(getRentDays(rental));
-        return rentDays.multiply(car.getDailyFee());
+        return rentDays.multiply(dailyFee);
     }
 
     @Override

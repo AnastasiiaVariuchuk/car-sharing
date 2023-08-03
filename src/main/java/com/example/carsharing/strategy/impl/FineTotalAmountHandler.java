@@ -1,6 +1,5 @@
 package com.example.carsharing.strategy.impl;
 
-import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import com.example.carsharing.strategy.TotalAmountHandler;
@@ -12,9 +11,9 @@ public class FineTotalAmountHandler implements TotalAmountHandler {
     private static final BigDecimal FINE_MULTIPLIER = BigDecimal.valueOf(1.25);
 
     @Override
-    public BigDecimal getTotalAmount(Rental rental, Car car) {
+    public BigDecimal getTotalAmount(Rental rental, BigDecimal dailyFee) {
         BigDecimal rentHours = BigDecimal.valueOf(getRentDays(rental));
-        return rentHours.multiply(car.getDailyFee()).multiply(FINE_MULTIPLIER);
+        return rentHours.multiply(dailyFee).multiply(FINE_MULTIPLIER);
     }
 
     @Override
