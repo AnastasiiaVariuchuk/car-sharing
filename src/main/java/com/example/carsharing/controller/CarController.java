@@ -40,21 +40,21 @@ public class CarController {
     // GET /cars/{id}
 
     @GetMapping("/{id}")
-    public CarResponseDto getDetailedInfo(@PathVariable Long id) {
-        return carMapper.mapToDto(carService.getById(id));
+    public CarResponseDto getDetailedInfo(@PathVariable("id") Long carId) {
+        return carMapper.mapToDto(carService.getById(carId));
     }
     // PATCH /cars/{id}
 
     @PatchMapping("/{id}")
-    public CarResponseDto updateCar(@PathVariable Long id,
+    public CarResponseDto updateCar(@PathVariable("id") Long carId,
                                     @RequestBody CarRequestDto carRequestDto) {
-        return carMapper.mapToDto(carService.update(id, carMapper.mapToEntity(carRequestDto)));
+        return carMapper.mapToDto(carService.update(carId, carMapper.mapToEntity(carRequestDto)));
     }
     //DELETE / cars/{id}
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Long id) {
-        carService.delete(id);
+    public void delete(@PathVariable("id") Long carId) {
+        carService.delete(carId);
     }
 }
