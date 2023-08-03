@@ -79,7 +79,7 @@ class CarControllerTest {
     }
 
     @Test
-    void getAll_emptyDB_ok() {
+    void getAll_emptyDb_ok() {
         when(carService.getAll()).thenReturn(Collections.emptyList());
         List<CarResponseDto> expected = Collections.emptyList();
         List<CarResponseDto> actual = carController.getAll();
