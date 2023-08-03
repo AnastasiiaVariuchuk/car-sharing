@@ -26,7 +26,6 @@ public class RentalController {
     private final RentalService rentalService;
     private final RentalMapper rentalMapper;
 
-    // POST: /rentals
     @PostMapping
     public ResponseEntity<RentalResponseDto> addRental(@RequestBody
                                                            RentalRequestDto rentalRequestDto) {
@@ -36,7 +35,6 @@ public class RentalController {
         return new ResponseEntity<>(rentalResponseDto, HttpStatus.CREATED);
     }
 
-    // GET: /rentals?user_id=...&is_active=...
     @GetMapping
     public ResponseEntity<List<RentalResponseDto>> getRentals(@RequestParam Long userId,
                                                               @RequestParam boolean isActive) {
@@ -49,7 +47,6 @@ public class RentalController {
         return new ResponseEntity<>(rentalResponseDtos, HttpStatus.OK);
     }
 
-    // GET: /rentals/<id>
     @GetMapping("/{id}")
     public ResponseEntity<RentalResponseDto> getRentalById(@PathVariable Long id) {
         Rental rental = rentalService.getById(id);
@@ -57,7 +54,6 @@ public class RentalController {
         return new ResponseEntity<>(rentalResponseDto, HttpStatus.OK);
     }
 
-    // POST: /rentals/<id>/return
     @PostMapping("/{id}/return")
     public ResponseEntity<RentalResponseDto> returnRental(@PathVariable Long id) {
         Rental rental = rentalService.terminate(id);

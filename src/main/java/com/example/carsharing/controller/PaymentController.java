@@ -1,5 +1,6 @@
 package com.example.carsharing.controller;
 
+import com.example.carsharing.dto.request.PaymentRequestDto;
 import com.example.carsharing.dto.response.PaymentResponseDto;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
@@ -16,6 +17,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,14 +47,13 @@ public class PaymentController {
     }
 
     @PostMapping
-    public PaymentResponseDto createSession(@RequestParam Long rentalId)
+    public PaymentResponseDto createSession(@RequestBody PaymentRequestDto paymentRequestDto)
             throws StripeException {
-        Rental rental = rentalService.getById(rentalId);
+        Rental rental = rentalService.getById(paymentRequestDto.getRentalId());
         Payment payment = new Payment();
-        payment.setId(rental.getId());
         payment.setRental(rental);
         payment.setStatus(Payment.Status.PENDING);
-        payment.setType(paymentService.findType(rental));
+        payment.setType(paymentRequestDto.getType());
         Car car = rental.getCar();
         payment.setAmountToPay(strategy.getToTalAmountHandler(payment.getType())
                 .getTotalAmount(rental, car.getDailyFee()));
