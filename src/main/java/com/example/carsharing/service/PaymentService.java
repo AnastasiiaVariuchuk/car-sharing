@@ -10,7 +10,5 @@ public interface PaymentService {
 
     List<Payment> getByUser(User user);
 
-    Payment.Type findType(Rental rental);
-
     Payment setPaid(String sessionId);
 }
