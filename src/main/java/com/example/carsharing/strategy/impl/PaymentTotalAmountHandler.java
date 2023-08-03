@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentTotalAmountHandler implements TotalAmountHandler {
-    private static BigDecimal PER_HOUR = BigDecimal.valueOf(5);
 
     @Override
-    public BigDecimal getTotalAmount(Rental rental) {
-        BigDecimal rentHours = BigDecimal.valueOf(getRentHours(rental));
-        return rentHours.multiply(PER_HOUR);
+    public BigDecimal getTotalAmount(Rental rental, BigDecimal dailyFee) {
+        BigDecimal rentDays = BigDecimal.valueOf(getRentDays(rental));
+        return rentDays.multiply(dailyFee);
     }
 
     @Override
