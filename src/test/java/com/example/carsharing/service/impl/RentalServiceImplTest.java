@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.example.carsharing.exception.AlreadyTerminatedRentalException;
 import com.example.carsharing.exception.NotEnoughCarInventoryException;
@@ -58,15 +61,10 @@ public class RentalServiceImplTest {
     public void add_enoughCarInventory_ok() {
         //Given
         car.setInventory(2);
-        doNothing().when(notificationsService).newRentalParser(isA(Rental.class));
-
+        doNothing().when(notificationsService).rentalToMessage(isA(Rental.class));
         when(carService.getById(CAR_ID)).thenReturn(car);
         when(userService.getById(USER_ID)).thenReturn(user);
-        //lightweit
-        //intergration tests
         when(rentalRepository.save(any(Rental.class))).thenReturn(new Rental());
-        notificationsService.newRentalParser(new Rental());
-        verify(notificationsService).newRentalParser(new Rental());
 
         //When
         Rental requestedRental = new Rental();
@@ -77,6 +75,7 @@ public class RentalServiceImplTest {
 
         //Then
         assertNotNull(rental);
+        verify(notificationsService).rentalToMessage(any());
     }
 
     @Test

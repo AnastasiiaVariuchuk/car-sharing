@@ -18,8 +18,8 @@ public class PaymentProvider {
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
     private String currency = "usd";
-    private String successUrl = "https://localhost:8080/payments/success";
-    private String cancelUrl = "https://localhost:8080/payments/cancel";
+    private String successUrl = "http://localhost:8080/payments/success";
+    private String cancelUrl = "http://localhost:8080/payments/cancel";
 
     @PostConstruct
     public void init() {
@@ -56,6 +56,5 @@ public class PaymentProvider {
         } catch (StripeException e) {
             throw new NoSuchSessionException("Can't find session with id: " + sessionId, e);
         }
-
     }
 }

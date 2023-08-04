@@ -1,12 +1,15 @@
 package com.example.carsharing.service;
 
+import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import java.util.List;
 
 public interface NotificationsService {
-    void notify(String message);
+    void notify(String message, String chatId);
 
-    void newRentalParser(Rental rental);
+    void rentalToMessage(Rental rental);
 
-    void overdueRentalsNotify(List<Rental> rentalOverdueList);
+    void overdueRentalsToMessage(List<Rental> rentalOverdueList, short remainingTime);
+
+    void paymentToMessage(Payment payment);
 }

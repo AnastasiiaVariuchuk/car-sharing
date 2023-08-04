@@ -2,11 +2,14 @@ package com.example.carsharing.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.PaymentRepository;
+import com.example.carsharing.service.NotificationsService;
 import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class PaymentServiceImplTest {
     @Mock
     private PaymentRepository paymentRepository;
+    @Mock
+    private NotificationsService notificationsService;
     @InjectMocks
     private PaymentServiceImpl paymentService;
     private Payment payment;
@@ -55,8 +60,10 @@ class PaymentServiceImplTest {
     void setPaid_validSession_ok() {
         String sessionId = "session_id";
         when(paymentRepository.getBySessionId(sessionId)).thenReturn(payment);
+        doNothing().when(notificationsService).paymentToMessage(payment);
         Payment.Status expected = Payment.Status.PAID;
         Payment actual = paymentService.setPaid(sessionId);
         assertEquals(expected, actual.getStatus());
+        verify(notificationsService).paymentToMessage(payment);
     }
 }

@@ -13,5 +13,5 @@ public interface RentalService {
 
     Rental terminate(Long id);
 
-    void checkRentalReturnDates();
+    void checkRentalsForOverdueAndNotify();
 }

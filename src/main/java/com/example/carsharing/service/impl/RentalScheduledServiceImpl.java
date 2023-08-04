@@ -15,7 +15,7 @@ public class RentalScheduledServiceImpl implements RentalScheduledService {
     @Async
     @Scheduled(cron = "0 * * ? * *")
     @Override
-    public void checkRentalReturnDates() {
-        rentalService.checkRentalReturnDates();
+    public void checkRentalsForOverdueAndNotify() {
+        rentalService.checkRentalsForOverdueAndNotify();
     }
 }

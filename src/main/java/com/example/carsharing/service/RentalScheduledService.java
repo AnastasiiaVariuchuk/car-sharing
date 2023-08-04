@@ -1,5 +1,5 @@
 package com.example.carsharing.service;
 
 public interface RentalScheduledService {
-    void checkRentalReturnDates();
+    void checkRentalsForOverdueAndNotify();
 }

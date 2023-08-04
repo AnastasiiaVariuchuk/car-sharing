@@ -7,6 +7,7 @@ import com.example.carsharing.model.Rental;
 import com.example.carsharing.model.User;
 import com.example.carsharing.repository.RentalRepository;
 import com.example.carsharing.service.CarService;
+import com.example.carsharing.service.NotificationsService;
 import com.example.carsharing.service.RentalService;
 import com.example.carsharing.service.UserService;
 import java.time.LocalDateTime;
@@ -20,10 +21,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
     private static final int MIN_AMOUNT_TO_RENT = 1;
+    private static final short RENT_TIME_LEFT = 6;
     private final RentalRepository rentalRepository;
     private final CarService carService;
     private final UserService userService;
-    private final TelegramNotificationsService notificationsService;
+    private final NotificationsService notificationsService;
 
     @Override
     public Rental add(Rental requestRental) {
@@ -40,7 +42,7 @@ public class RentalServiceImpl implements RentalService {
         rental.setUser(userService.getById(requestRental.getUser().getId()));
         car.setInventory(car.getInventory() - 1);
         carService.update(car.getId(), car);
-        notificationsService.newRentalParser(rental);
+        notificationsService.rentalToMessage(rental);
         return rentalRepository.save(rental);
     }
 
@@ -72,19 +74,18 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public void checkRentalReturnDates() {
+    public void checkRentalsForOverdueAndNotify() {
         List<Rental> rentalOverdueList = new ArrayList<>();
         for (Rental rental : rentalRepository.findAll()) {
-            System.out.println(rental);
             LocalDateTime returnDate = rental.getReturnDate().withSecond(0).withNano(0);
             LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
-
-            if (now.plusHours(6).equals(returnDate) && rental.getActualReturnDate() == null) {
+            if (now.plusHours(RENT_TIME_LEFT).equals(returnDate)
+                    && rental.getActualReturnDate() == null) {
                 rentalOverdueList.add(rental);
             }
         }
         if (!rentalOverdueList.isEmpty()) {
-            notificationsService.overdueRentalsNotify(rentalOverdueList);
+            notificationsService.overdueRentalsToMessage(rentalOverdueList, RENT_TIME_LEFT);
         }
     }
 }
