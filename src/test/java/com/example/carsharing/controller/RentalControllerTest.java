@@ -48,18 +48,6 @@ class RentalControllerTest {
         assertEquals(rentalResponseDto, response.getBody());
     }
 
-    /*@Test
-    void getRentals_validParams_ok() {
-        List<Rental> rentals = List.of(rental);
-        when(rentalService.getByUserAndActiveness(any(User.class),
-                anyBoolean())).thenReturn(rentals);
-        when(rentalMapper.mapToDto(any(Rental.class))).thenReturn(rentalResponseDto);
-        ResponseEntity<List<RentalResponseDto>> response =
-                rentalController.getRentals(, true);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(List.of(rentalResponseDto), response.getBody());
-    }*/
-
     @Test
     void getRentalById_validId_ok() {
         when(rentalService.getById(RENTAL_ID)).thenReturn(rental);

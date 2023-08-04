@@ -31,7 +31,7 @@ public class RentalController {
 
     @PostMapping
     public ResponseEntity<RentalResponseDto> addRental(@RequestBody
-                                                           RentalRequestDto rentalRequestDto) {
+                                                       RentalRequestDto rentalRequestDto) {
         Rental rental = rentalMapper.mapToEntity(rentalRequestDto);
         Rental addedRental = rentalService.add(rental);
         RentalResponseDto rentalResponseDto = rentalMapper.mapToDto(addedRental);
