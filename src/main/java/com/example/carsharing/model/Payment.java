@@ -11,11 +11,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+
 @Entity
 @Table(name = "payments")
 public class Payment {
