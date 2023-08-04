@@ -9,7 +9,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(config = MapperConfig.class)
 public interface RentalMapper {
-    @Mapping(target = "user.password", ignore = true)
+    @Mapping(target = "carId", source = "rental.car.id")
+    @Mapping(target = "userId", source = "rental.user.id")
     RentalResponseDto mapToDto(Rental rental);
 
     @Mapping(target = "id", ignore = true)

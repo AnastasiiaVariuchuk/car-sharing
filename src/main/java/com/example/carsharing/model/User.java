@@ -10,12 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@ToString
 @Accessors(chain = true)
 @Entity
 @Table(name = "users")
@@ -27,7 +25,6 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
-    @ToString.Exclude
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

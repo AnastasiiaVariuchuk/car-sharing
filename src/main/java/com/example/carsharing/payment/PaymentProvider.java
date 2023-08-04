@@ -18,8 +18,8 @@ public class PaymentProvider {
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
     private String currency = "usd";
-    private String successUrl = "http://localhost:8080/payments/success";
-    private String cancelUrl = "http://localhost:8080/payments/cancel";
+    private String successUrl = "http://localhost:8081/payments/success";
+    private String cancelUrl = "http://localhost:8081/payments/cancel";
 
     @PostConstruct
     public void init() {
