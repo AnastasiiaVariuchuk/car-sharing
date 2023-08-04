@@ -5,6 +5,7 @@ import com.example.carsharing.dto.response.PaymentResponseDto;
 import com.example.carsharing.model.Car;
 import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
+import com.example.carsharing.model.User;
 import com.example.carsharing.payment.PaymentProvider;
 import com.example.carsharing.service.PaymentService;
 import com.example.carsharing.service.RentalService;
@@ -15,6 +16,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,8 +67,16 @@ public class PaymentController {
     }
 
     @GetMapping
-    public List<PaymentResponseDto> getByUser(@RequestParam("user_id") Long userId) {
+    public List<PaymentResponseDto> getByUserId(@RequestParam("user_id") Long userId) {
         return paymentService.getByUser(userService.getById(userId)).stream()
+                .map(paymentMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/my")
+    public List<PaymentResponseDto> getPaymentsForCurrentUser(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName()).get();
+        return paymentService.getByUser(user).stream()
                 .map(paymentMapper::mapToDto)
                 .toList();
     }
