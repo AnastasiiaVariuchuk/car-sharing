@@ -31,7 +31,10 @@
 4. The application should now be running at `http://localhost:8080`.
 
 ### <img src="https://em-content.zobj.net/thumbs/160/apple/354/building-construction_1f3d7-fe0f.png" width="25"/> Project architecture:
-![Screenshot](assets/architecture.png)
+![architecture](assets/architecture.png)
+
+### <img src="https://em-content.zobj.net/source/apple/354/floppy-disk_1f4be.png" width="25"/> Database structure:
+#### <h4 align="center"> ![car-sharing](assets/car-sharing.png) </h4>
 
 ### <img src="https://em-content.zobj.net/thumbs/160/apple/354/link_1f517.png" width="25"/> API Endpoints
 `The Car Sharing Service provides the following API endpoints:`
@@ -50,7 +53,7 @@
 | GET             | /cars/{id}                     | ALL        | Get detailed information about a car.           |
 | PATCH           | /cars/{id}                     | ADMIN      | Update a car's information.                     |
 | DELETE          | /cars/{id}                     | ADMIN      | Delete a car.                                   |
-| POST            | /rentals                       | ADMIN/USER        | Add a new rental.                               |
+| POST            | /rentals                       | ADMIN/USER        | Add a new rental.                        |
 | GET             | /rentals                       | ADMIN/USER | Get rentals by user ID and rental status.       |
 | GET             | /rentals/{id}                  | ADMIN/USER | Get specific rental by ID.                      |
 | POST            | /rentals/{id}/return           | ADMIN/USER | Set actual return date for a rental.            |
