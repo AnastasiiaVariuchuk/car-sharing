@@ -56,6 +56,5 @@ public class PaymentProvider {
         } catch (StripeException e) {
             throw new NoSuchSessionException("Can't find session with id: " + sessionId, e);
         }
-
     }
 }
