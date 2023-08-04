@@ -59,6 +59,7 @@
 | POST            | /rentals/{id}/return           | ADMIN/USER | Set actual return date for a rental.            |
 | POST            | /payments                      | ADMIN/USER | Create a payment session for a rental.          |
 | GET             | /payments                      | ADMIN/USER | Get payments by user ID.                        |
+| GET             | /payments/my                   | USER       | Get payments for current user.                        |
 | GET             | /payments/success              | ALL        | Endpoint for handling successful Stripe payments. |
 | GET             | /payments/cancel               | ALL        | Endpoint for handling canceled Stripe payments.  |
 
