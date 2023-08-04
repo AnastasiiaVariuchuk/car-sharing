@@ -1,7 +1,10 @@
 package com.example.carsharing.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.carsharing.model.Payment;
 import com.example.carsharing.model.Rental;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -51,7 +54,7 @@ class FineTotalAmountHandlerTest {
     }
 
     @Test
-    void getOverdueDays_3OverdueDays_ok() {
+    void getOverdueDays_1OverdueDays_ok() {
         Rental rental = new Rental();
         rental.setRentalDate(LocalDateTime.of(2023, 8,3,10,30));
         rental.setReturnDate(LocalDateTime.of(2023, 8,3,15,30));
@@ -61,5 +64,17 @@ class FineTotalAmountHandlerTest {
         BigDecimal value = BigDecimal.valueOf(94.5);
         BigDecimal expected = value.setScale(2, BigDecimal.ROUND_HALF_UP);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void isApplicable_fineType_ok() {
+        boolean actual = fineHandler.isApplicable(Payment.Type.FINE);
+        assertTrue(actual);
+    }
+
+    @Test
+    void isApplicable_paymentType_ok() {
+        boolean actual = fineHandler.isApplicable(Payment.Type.PAYMENT);
+        assertFalse(actual);
     }
 }
