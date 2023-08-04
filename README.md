@@ -48,13 +48,13 @@
 | POST            | /cars                          | ADMIN      | Add a new car.                                  |
 | GET             | /cars                          | ALL        | Get a list of all cars.                         |
 | GET             | /cars/{id}                     | ALL        | Get detailed information about a car.           |
-| PUT             | /cars/{id}                     | ADMIN      | Update a car's information.                     |
+| PATCH           | /cars/{id}                     | ADMIN      | Update a car's information.                     |
 | DELETE          | /cars/{id}                     | ADMIN      | Delete a car.                                   |
-| POST            | /rentals                       | ALL        | Add a new rental.                               |
+| POST            | /rentals                       | ADMIN/USER        | Add a new rental.                               |
 | GET             | /rentals                       | ADMIN/USER | Get rentals by user ID and rental status.       |
 | GET             | /rentals/{id}                  | ADMIN/USER | Get specific rental by ID.                      |
 | POST            | /rentals/{id}/return           | ADMIN/USER | Set actual return date for a rental.            |
-| POST            | /payments                      | ALL        | Create a payment session for a rental.          |
+| POST            | /payments                      | ADMIN/USER | Create a payment session for a rental.          |
 | GET             | /payments                      | ADMIN/USER | Get payments by user ID.                        |
 | GET             | /payments/success              | ALL        | Endpoint for handling successful Stripe payments. |
 | GET             | /payments/cancel               | ALL        | Endpoint for handling canceled Stripe payments.  |
